@@ -36,7 +36,6 @@ struct BotSelection: View {
                 }
             }
         } detail: {
-            //Text("Select an item")
         }
     }
 
