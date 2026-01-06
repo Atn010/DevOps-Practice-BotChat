@@ -1,0 +1,7 @@
+environments:
+  - Release
+  - Debug
+environment_secrets:
+  - apiKey
+global_secrets:
+  - botAccessKey
