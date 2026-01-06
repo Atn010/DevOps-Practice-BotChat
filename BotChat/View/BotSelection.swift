@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import ArkanaKeys
 
 struct BotSelection: View {
     @Environment(\.modelContext) private var modelContext
@@ -26,7 +27,8 @@ struct BotSelection: View {
                             Image(item.image)
                             VStack {
                                 Text(item.name)
-                                Text(item.desc)
+                                Text(item.desc).font(.footnote)
+                                Text("APi Key: \(ArkanaKeys.Global().botAccessKey)").font(.footnote)
                             }
                             Spacer()
                         }
