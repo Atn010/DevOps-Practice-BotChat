@@ -1,5 +1,11 @@
+
+
+
+name: retry
+
+on:
+  workflow_dispatch:
+
 jobs:
-  test:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v4
+  build:
+    runs-on: [self-hosted, macOS, ARM64]
