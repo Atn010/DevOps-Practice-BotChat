@@ -31,6 +31,7 @@
 		E172D7442F0B59D300E9772C /* BotChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BotChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E172D7562F0B59D600E9772C /* BotChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BotChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E172D7602F0B59D600E9772C /* BotChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BotChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1FC0F2A2F0F55B30041BFD7 /* BotChat.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = BotChat.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -80,6 +81,7 @@
 		E172D73B2F0B59D300E9772C = {
 			isa = PBXGroup;
 			children = (
+				E1FC0F2A2F0F55B30041BFD7 /* BotChat.xctestplan */,
 				E172D7462F0B59D300E9772C /* BotChat */,
 				E172D7592F0B59D600E9772C /* BotChatTests */,
 				E172D7632F0B59D600E9772C /* BotChatUITests */,
@@ -402,10 +404,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = W7VX669QKF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -434,10 +437,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = W7VX669QKF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
