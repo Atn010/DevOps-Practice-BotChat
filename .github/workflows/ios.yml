@@ -11,8 +11,7 @@ jobs:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: self-hosted
 
-    steps:    
-      - name: Checkout
+    steps: 
       - uses: actions/checkout@v4
 
       - name: Select Xcode
