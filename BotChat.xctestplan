@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "12674484-EE19-446B-89E7-1D8163CF90FE",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:BotChat.xcodeproj",
+      "identifier" : "E172D7432F0B59D300E9772C",
+      "name" : "BotChat"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:BotChat.xcodeproj",
+        "identifier" : "E172D7552F0B59D600E9772C",
+        "name" : "BotChatTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:BotChat.xcodeproj",
+        "identifier" : "E172D75F2F0B59D600E9772C",
+        "name" : "BotChatUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

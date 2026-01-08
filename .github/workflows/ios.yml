@@ -2,18 +2,25 @@ name: iOS starter workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "config"  ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "config" ]
 
 jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: self-hosted
 
-    steps:
+    steps:    
       - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Resolve packages
+        run: xcodebuild -resolvePackageDependencies
+
       - name: Set Default Scheme
         run: |
           scheme_list=$(xcodebuild -list -json | tr -d "\n")
