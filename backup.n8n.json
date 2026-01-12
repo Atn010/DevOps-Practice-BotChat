@@ -1,0 +1,83 @@
+{
+  "services": {
+    "N8n": {
+      "container_name": "N8n",
+      "image": "docker.n8n.io/n8nio/n8n",
+      "environment": [
+        "DB_TYPE=postgresdb",
+        "DB_POSTGRESDB_HOST=N8n-postgres",
+        "DB_POSTGRESDB_PORT=5432",
+        "DB_POSTGRESDB_DATABASE=n8n",
+        "DB_POSTGRESDB_USER=n8n",
+        "DB_POSTGRESDB_PASSWORD=8RXNNX2G6SLDN2MK5QMFSB7R",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "NODE_VERSION=22.17.0",
+        "YARN_VERSION=1.22.22",
+        "NODE_ICU_DATA=/usr/local/lib/node_modules/full-icu",
+        "NODE_ENV=production",
+        "N8N_RELEASE_TYPE=stable",
+        "SHELL=/bin/sh",
+        "WEBHOOK_URL=https://example.com",
+        "NPM_CONFIG_UPDATE_NOTIFIER=false",
+        "YARN_DISABLE_SELF_UPDATE_CHECK=true"
+      ],
+      "labels": {
+        "com.docker.dhi.chain-id": "sha256:2143b08f4773e9f0de101e105230be0dd90ad3920c3821ae8d4020960441ed21",
+        "com.docker.dhi.compliance": "cis",
+        "com.docker.dhi.created": "2025-12-16T10:49:47Z",
+        "com.docker.dhi.date.end-of-life": "2027-04-30",
+        "com.docker.dhi.date.release": "2024-04-24",
+        "com.docker.dhi.definition": "image/node/alpine/22-dev",
+        "com.docker.dhi.distro": "alpine-3.22",
+        "com.docker.dhi.flavor": "",
+        "com.docker.dhi.name": "dhi/node",
+        "com.docker.dhi.package-manager": "apk",
+        "com.docker.dhi.shell": "busybox",
+        "com.docker.dhi.title": "Node.js 22.x (dev)",
+        "com.docker.dhi.url": "https://dhi.docker.com/catalog/node",
+        "com.docker.dhi.variant": "dev",
+        "com.docker.dhi.version": "22.21.1-alpine3.22-dev",
+        "cosmos-auto-update": "true",
+        "cosmos-force-network-mode": "cosmos-N8n-default",
+        "cosmos-force-network-secured": "true",
+        "cosmos-icon": "https://azukaar.github.io/cosmos-servapps-official/N8n/icon.png",
+        "cosmos-persistent-env": "DB_POSTGRESDB_PORT, DB_POSTGRESDB_PORT, DB_POSTGRESDB_DATABASE, DB_POSTGRESDB_USER, DB_POSTGRESDB_PASSWORD",
+        "cosmos-stack": "N8n",
+        "cosmos-stack-main": "N8n",
+        "org.opencontainers.image.description": "Workflow Automation Tool",
+        "org.opencontainers.image.source": "https://github.com/n8n-io/n8n",
+        "org.opencontainers.image.title": "n8n",
+        "org.opencontainers.image.url": "https://n8n.io",
+        "org.opencontainers.image.version": "1.105.4"
+      },
+      "ports": [],
+      "volumes": [
+        {
+          "Type": "volume",
+          "Source": "N8n-n8n_storage",
+          "Target": "/home/node/.n8n"
+        }
+      ],
+      "networks": {
+        "N8n-postgres": {},
+        "cosmos-N8n-default": {}
+      },
+      "routes": null,
+      "restart": "unless-stopped",
+      "devices": null,
+      "expose": [],
+      "entrypoint": "tini -- /docker-entrypoint.sh",
+      "runtime": "runc",
+      "working_dir": "/home/node",
+      "user": "node",
+      "network_mode": "cosmos-N8n-default",
+      "healthcheck": {
+        "test": null,
+        "interval": 0,
+        "timeout": 0,
+        "retries": 0,
+        "start_period": 0
+      }
+    }
+  }
+}
