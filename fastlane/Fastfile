@@ -1,11 +1,43 @@
+fastlane_require 'dotenv'
 default_platform(:ios)
 
+
+#Main Functions
 platform :ios do
+  desc "Update Certificate"
+  lane :forceMatch do |options|
+    updateProfileWithMatch = false
+
+    if !options[:forceMatch].nil?
+        updateProfileWithMatch = options[:forceMatch]
+    end
+
+    bootstrap(forceMatch: updateProfileWithMatch)
+  end
+
+  desc "Bootstrap Certificate"
+  lane :bootstrap do
+  begin
+    api_key = app_store_connect_api_key(
+    key_id: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_ID'],
+    issuer_id: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_ISSUER_ID'],
+    key_filepath: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_PATH'],
+    duration: 1200, # optional (maximum 1200)
+    in_house: false # optional but may be required if using match/sigh
+    )
+  rescue => exception
+    userName = ENV['APPLE_ID']
+  ensure
+    match_app_botchat(type: "appstore", bundleId:"com.atn010.botchat", bundleIdNotificationServices:"com.atn010.botchat.notification", apiKey: api_key, userName: userName, forceMatch: options[:forceMatch])
+      end
+  end
+
   desc "Build app for release and push to TestFlight"
   lane :deploy do
     # Build the app
     build_app(scheme: "BotChat")
 
+    #If have Apple Developer Profile
     #api_key = app_store_connect_api_key(
     #        key_id: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_ID'],
     #        issuer_id: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_ISSUER_ID'],
@@ -24,6 +56,7 @@ platform :ios do
     #        codesigning: "",
     #        provisioningProfiles: {
     #            "com.atn010.botchat" => "match AppStore com.atn010.botchat",
+    #            "com.atn010.botchat.notification" => "match AppStore com.atn010.botchat.notification",
     #        }
     #    )
 
@@ -36,4 +69,94 @@ platform :ios do
     #)
 
   end
+end
+
+
+
+#Functions
+platform :ios do
+
+  desc "Match data"
+  lane :match_app_botchat do |options|
+      match_app(
+          type: options[:type],
+          bundleId:options[:bundleId],
+          bundleIdNotificationServices:options[:bundleIdNotificationServices],
+          teamName: ENV['TEAM_NAME_BOTCHAT'],
+          teamID: ENV['TEAM_ID_BOTCHAT'],
+          gitURL: ENV['GIT_URL_FOR_MATCH_BOTCHAT'],
+          apiKey: options[:apiKey],
+          userName: options[:userName],
+          forceMatch: options[:forceMatch]
+      )
+  end
+
+    desc "Build app for release and push to TestFlight"
+    lane :match_app do |options|
+        begin
+            selectedType = options[:type]
+            bundleId = options[:bundleId]
+            bundleIdNotificationServices = options[:bundleIdNotificationServices]
+            apiKey = options[:apiKey]
+            isReadOnly = true
+            teamName = options[:teamName]
+            teamID = options[:teamID]
+            gitURL = options[:gitURL]
+            userName = options[:userName]
+
+            if selectedType.nil? && bundleId.nil? && bundleIdNotificationServices.nil? && teamName.nil? && teamID.nil? && gitURL.nil?
+                fail "Missing Required Files"
+            end
+
+            forceMatch = false
+
+            if !options[:forceMatch].nil?
+            forceMatch = options[:forceMatch]
+            isReadOnly = !options[:forceMatch]
+            end
+
+
+            if !apiKey.nil?
+                match(
+                    type: selectedType,
+                    app_identifier: [
+                        bundleId,
+                        bundleIdNotificationServices
+                    ],
+                    api_key: apiKey,
+                    team_name: teamName,
+                    team_id: teamID,
+                    git_url: gitURL,
+                    keychain_name: ENV['KEYCHAIN_NAME'],
+                    keychain_password: ENV['KEYCHAIN_PASSWORD'],
+                    git_basic_authorization: Base64.strict_encode64("BotMatch:#{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}"),
+                    readonly: isReadOnly,
+                    fail_on_name_taken: true,
+                    safe_remove_certs: forceMatch,
+                    force: forceMatch
+                )
+            elsif !userName.nil?
+                match(
+                    type: selectedType,
+                    app_identifier: [
+                        bundleId,
+                        bundleIdNotificationServices
+                    ],
+                    team_name: teamName,
+                    team_id: teamID,
+                    username: userName,
+                    git_url: gitURL,
+                    keychain_name: ENV['KEYCHAIN_NAME'],
+                    keychain_password: ENV['KEYCHAIN_PASSWORD'],
+                    git_basic_authorization: Base64.strict_encode64("faizbarajatada:#{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}"),
+                    readonly: isReadOnly,
+                    fail_on_name_taken: true,
+                    safe_remove_certs: forceMatch,
+                    force: forceMatch
+                )
+            else
+                fail "Missing APIKey or Username for Match"
+            end
+        end
+    end
 end
