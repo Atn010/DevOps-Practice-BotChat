@@ -15,10 +15,42 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios forceMatch
+
+```sh
+[bundle exec] fastlane ios forceMatch
+```
+
+Update Certificate
+
+### ios bootstrap
+
+```sh
+[bundle exec] fastlane ios bootstrap
+```
+
+Bootstrap Certificate
+
 ### ios deploy
 
 ```sh
 [bundle exec] fastlane ios deploy
+```
+
+Build app for release and push to TestFlight
+
+### ios match_app_botchat
+
+```sh
+[bundle exec] fastlane ios match_app_botchat
+```
+
+Match data
+
+### ios match_app
+
+```sh
+[bundle exec] fastlane ios match_app
 ```
 
 Build app for release and push to TestFlight
