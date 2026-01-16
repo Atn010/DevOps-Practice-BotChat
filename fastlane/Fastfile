@@ -35,38 +35,38 @@ platform :ios do
   desc "Build app for release and push to TestFlight"
   lane :deploy do
     # Build the app
-    build_app(scheme: "BotChat")
+    #build_app(scheme: "BotChat")
+    increment_build_number
 
-    #If have Apple Developer Profile
-    #api_key = app_store_connect_api_key(
-    #        key_id: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_ID'],
-    #        issuer_id: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_ISSUER_ID'],
-    #        key_filepath: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_PATH'],
-    #        duration: 1200, # optional (maximum 1200)
-    #        in_house: false # optional but may be required if using match/sigh
-    #        )
+    api_key = app_store_connect_api_key(
+            key_id: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_ID'],
+            issuer_id: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_ISSUER_ID'],
+            key_filepath: ENV['BOTCHAT_PRODUCTION_PERSONAL_API_KEY_PATH'],
+            duration: 1200, # optional (maximum 1200)
+            in_house: false # optional but may be required if using match/sigh
+            )
 
-    #make_build(
-    #        workspace: "TADAWallet.xcworkspace",
-    #        configuration: "Release (TADA release)",
-    #        scheme: "BotChat",
-    #        ipa: "BotChat.ipa",
-    #        method: "app-store",
-    #        teamId: ENV['TEAM_ID_BOTCHAT'],
-    #        codesigning: "",
-    #        provisioningProfiles: {
-    #            "com.atn010.botchat" => "match AppStore com.atn010.botchat",
-    #            "com.atn010.botchat.notification" => "match AppStore com.atn010.botchat.notification",
-    #        }
-    #    )
+    make_build(
+            workspace: "TADAWallet.xcworkspace",
+            configuration: "Release (TADA release)",
+            scheme: "BotChat",
+            ipa: "BotChat.ipa",
+            method: "app-store",
+            teamId: ENV['TEAM_ID_BOTCHAT'],
+            codesigning: "",
+            provisioningProfiles: {
+                "com.atn010.botchat" => "match AppStore com.atn010.botchat",
+                "com.atn010.botchat.notification" => "match AppStore com.atn010.botchat.notification",
+            }
+        )
 
-    #pilot(
-    #      team_name: ENV['TEAM_NAME_BOTCHAT'],
-    #      team_id: ENV['TEAM_ID_BOTCHAT'],
-    #      api_key: api_key,
-    #      ipa: "./fastlane/ipa_builds/BotChat.ipa",
-    #      skip_waiting_for_build_processing: false
-    #)
+    pilot(
+          team_name: ENV['TEAM_NAME_BOTCHAT'],
+          team_id: ENV['TEAM_ID_BOTCHAT'],
+          api_key: api_key,
+          ipa: "./fastlane/ipa_builds/BotChat.ipa",
+          skip_waiting_for_build_processing: false
+    )
 
   end
 end
